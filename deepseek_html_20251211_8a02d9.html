@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joker Card - 100 English Jokes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffd1dc 0%, #ffecf1 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #ff66a3;
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 #ffb6d9;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Emoji Characters */
+        .emoji-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .emoji {
+            font-size: 2.8rem;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        .emoji:nth-child(2) { animation-delay: 0.2s; }
+        .emoji:nth-child(3) { animation-delay: 0.4s; }
+        .emoji:nth-child(4) { animation-delay: 0.6s; }
+        .emoji:nth-child(5) { animation-delay: 0.8s; }
+        .emoji:nth-child(6) { animation-delay: 1.0s; }
+        .emoji:nth-child(7) { animation-delay: 1.2s; }
+        .emoji:nth-child(8) { animation-delay: 1.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* Joke List Panel */
+        .joke-list-panel {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.1);
+            border: 3px solid #ffcce6;
+        }
+
+        .panel-title {
+            color: #ff66a3;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .joke-list {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .joke-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .joke-list::-webkit-scrollbar-track {
+            background: #fff0f7;
+            border-radius: 10px;
+        }
+
+        .joke-list::-webkit-scrollbar-thumb {
+            background: #ff99cc;
+            border-radius: 10px;
+        }
+
+        .joke-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #fff9fc;
+            border-radius: 12px;
+            border-left: 4px solid #ff99cc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .joke-item:hover {
+            background: #ffebf3;
+            transform: translateX(5px);
+        }
+
+        .joke-item.active {
+            background: #ffd9eb;
+            border-left-color: #ff3385;
+            box-shadow: 0 5px 10px rgba(255, 102, 163, 0.1);
+        }
+
+        .joke-name {
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: 600;
+        }
+
+        /* Joke Display Panel */
+        .joke-display-panel {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.1);
+            border: 3px solid #ffcce6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Joke Card */
+        .joke-card {
+            background: #fff9fc;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 2px dashed #ffcce6;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .joke-question {
+            font-size: 1.8rem;
+            color: #ff66a3;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .joke-answer {
+            font-size: 2rem;
+            color: #ff3385;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .show-answer-btn {
+            background: linear-gradient(to right, #ff66a3, #ff99cc);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            align-self: flex-start;
+        }
+
+        .show-answer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 102, 163, 0.3);
+        }
+
+        /* Explanations */
+        .explanations {
+            background: #fff0f7;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #ffcce6;
+            display: none;
+        }
+
+        .explanation-title {
+            color: #ff66a3;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .explanation-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff99cc;
+        }
+
+        .show-explanation-btn {
+            background: linear-gradient(to right, #ff99cc, #ff66a3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .show-explanation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 102, 163, 0.3);
+        }
+
+        /* Random Button */
+        .random-button {
+            background: linear-gradient(to right, #ff66a3, #ff99cc);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .random-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: #888;
+            font-size: 1rem;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #ffcce6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .emoji {
+                font-size: 2.2rem;
+            }
+            
+            .joke-question {
+                font-size: 1.5rem;
+            }
+            
+            .joke-answer {
+                font-size: 1.7rem;
+            }
+        }
+
+        /* Instructions */
+        .instructions {
+            background: #fff9fc;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff99cc;
+        }
+
+        .instructions h3 {
+            color: #ff66a3;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+            color: #666;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Joker Card</h1>
+            <p class="subtitle">Explore 100 funny English jokes. Click to see the answer, then reveal bilingual explanations in Traditional Chinese and English.</p>
+            
+            <div class="emoji-row">
+                <div class="emoji">😊</div>
+                <div class="emoji">😂</div>
+                <div class="emoji">🤣</div>
+                <div class="emoji">😄</div>
+                <div class="emoji">😆</div>
+                <div class="emoji">🤭</div>
+                <div class="emoji">😜</div>
+                <div class="emoji">🤗</div>
+            </div>
+        </header>
+        
+        <div class="instructions">
+            <h3>How to Use:</h3>
+            <ol>
+                <li>Select a joke from the list on the left</li>
+                <li>Click "Show Answer" to see the punchline</li>
+                <li>Click "Show Explanation" to see bilingual explanations</li>
+                <li>Use "Random Joke" to discover new jokes</li>
+            </ol>
+        </div>
+        
+        <div class="main-layout">
+            <!-- Joke List Panel -->
+            <div class="joke-list-panel">
+                <div class="panel-title">
+                    <i class="fas fa-list"></i>
+                    <span>All Jokes (100)</span>
+                </div>
+                
+                <div class="joke-list" id="jokeList">
+                    <!-- Joke list will be generated by JavaScript -->
+                </div>
+                
+                <button class="random-button" id="randomJokeBtn">
+                    <i class="fas fa-random"></i>
+                    Random Joke
+                </button>
+            </div>
+            
+            <!-- Joke Display Panel -->
+            <div class="joke-display-panel">
+                <div class="panel-title">
+                    <i class="fas fa-laugh"></i>
+                    <span>Joke Display</span>
+                </div>
+                
+                <div class="joke-card">
+                    <div class="joke-question" id="jokeQuestion">
+                        Select a joke from the list to see it here
+                    </div>
+                    <div class="joke-answer" id="jokeAnswer">
+                        The answer will appear here after you click "Show Answer"
+                    </div>
+                    <button class="show-answer-btn" id="showAnswerBtn">
+                        <i class="fas fa-eye"></i>
+                        Show Answer
+                    </button>
+                </div>
+                
+                <button class="show-explanation-btn" id="showExplanationBtn">
+                    <i class="fas fa-language"></i>
+                    Show Explanation (English & Traditional Chinese)
+                </button>
+                
+                <div class="explanations" id="explanations">
+                    <div class="explanation-title">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>English Explanation</span>
+                    </div>
+                    <div class="explanation-text" id="englishExplanation">
+                        The English explanation will appear here.
+                    </div>
+                    
+                    <div class="explanation-title">
+                        <i class="fas fa-language"></i>
+                        <span>繁體中文解釋</span>
+                    </div>
+                    <div class="explanation-text" id="chineseExplanation">
+                        繁體中文解釋將會出現在這裡。
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Joker Card - Enjoy 100 English jokes with bilingual explanations | Made with laughter 😄</p>
+        </footer>
+    </div>
+
+    <script>
+        // Complete database of 100 English jokes
+        const jokes = [
+            {
+                name: "Egg Joke",
+                question: "Why did the egg refuse to fight?",
+                answer: "Because it didn't want to get beaten!",
+                englishExplanation: "This is a pun on 'beaten' which can mean both physically hitting something and the process of whisking eggs.",
+                chineseExplanation: "這是一個雙關語，'beaten' 既可以指打人，也可以指打蛋（攪拌雞蛋）。"
+            },
+            {
+                name: "Math Book",
+                question: "Why was the math book sad?",
+                answer: "Because it had too many problems.",
+                englishExplanation: "The word 'problems' has a double meaning: both math exercises and difficulties in life.",
+                chineseExplanation: "'problems' 一詞有雙重含義：既可以指數學題，也可以指生活中的問題。"
+            },
+            {
+                name: "Beach Cow",
+                question: "What do you call a cow on the beach?",
+                answer: "A sand-wich!",
+                englishExplanation: "This is a play on words between 'sandwich' (food) and 'sand' which is on the beach.",
+                chineseExplanation: "這是'sandwich'（三明治）和沙灘上的'sand'（沙子）之間的雙關語。"
+            },
+            {
+                name: "Talking Dog",
+                question: "A man sees a sign: 'Talking Dog for Sale.' The owner says the dog can talk. What does the dog say?",
+                answer: "'I was a spy dog during the war.' But the owner says, 'He's lying! He did nothing!'",
+                englishExplanation: "The humor comes from the dog's exaggerated claim and the owner's disappointment about the dog lying.",
+                chineseExplanation: "幽默來自於狗狗誇大其詞地聲稱自己是間諜，而主人對狗狗說謊感到失望。"
+            },
+            {
+                name: "Swiss Flag",
+                question: "What's the best thing about Switzerland?",
+                answer: "I don't know, but the flag is a big plus.",
+                englishExplanation: "The Swiss flag is a white cross on red background (looks like a +) and 'a big plus' means a big advantage.",
+                chineseExplanation: "瑞士國旗是紅底白十字（看起來像+），而'a big plus'也表示巨大優勢。"
+            },
+            {
+                name: "Invisible Family",
+                question: "The invisible man married the invisible woman. What were their kids like?",
+                answer: "Their kids were nothing to look at.",
+                englishExplanation: "'Nothing to look at' usually means unattractive, but here literally means nothing visible to see.",
+                chineseExplanation: "'Nothing to look at'通常指沒有吸引力，但這裡字面意思是沒有東西可看。"
+            },
+            {
+                name: "Programmer's Light Bulb",
+                question: "How many programmers does it take to change a light bulb?",
+                answer: "None. It's a hardware problem.",
+                englishExplanation: "This humorously reflects the division between software and hardware responsibilities in tech.",
+                chineseExplanation: "幽默地反映了科技領域中軟體和硬體責任的劃分。"
+            },
+            {
+                name: "Singing Bank Robber",
+                question: "A bank robber gives a note that says 'Give me money or I'll sing.' Why is singing a threat?",
+                answer: "The robber says, 'Trust me, you don't want to hear me sing.'",
+                englishExplanation: "The humor comes from the unexpected threat of singing instead of violence.",
+                chineseExplanation: "幽默來自於用唱歌作為威脅，而不是典型的暴力威脅。"
+            },
+            {
+                name: "Lettuce In",
+                question: "Knock knock. Who's there? Lettuce. Lettuce who?",
+                answer: "Lettuce in, it's cold out here!",
+                englishExplanation: "A pun on 'lettuce' sounding like 'let us'.",
+                chineseExplanation: "'lettuce'（生菜）聽起來像'let us'（讓我們）的雙關語。"
+            },
+            {
+                name: "Time Traveler's Drink",
+                question: "A time traveler walks into a bar. What does he order?",
+                answer: "He says, 'I'm from the future, give me a drink that hasn't been invented yet.'",
+                englishExplanation: "The humor comes from the impossible request for a drink that doesn't exist in the present.",
+                chineseExplanation: "幽默來自於要求一種在當前還不存在的飲料這種不可能的要求。"
+            },
+            {
+                name: "Scared Chess Piece",
+                question: "Why was the chess piece scared?",
+                answer: "Because it was going to get taken!",
+                englishExplanation: "In chess, 'taken' means captured, but it can also mean frightened in everyday language.",
+                chineseExplanation: "在國際象棋中，'taken' 指被吃掉，但在日常用語中也可以指害怕。"
+            },
+            {
+                name: "Skeleton's Drink",
+                question: "Why didn't the skeleton go to the party?",
+                answer: "Because he had no body to go with!",
+                englishExplanation: "A pun on 'no body' meaning both 'nobody' and literally having no physical body.",
+                chineseExplanation: "'no body' 雙關語，既指'沒有人'，也字面上指沒有身體。"
+            },
+            {
+                name: "Library Ghost",
+                question: "What ghost haunts the library?",
+                answer: "A book-a-rang!",
+                englishExplanation: "A play on words combining 'book' and 'boomerang' with a ghost theme.",
+                chineseExplanation: "結合'book'和'boomerang'的文字遊戲，帶有鬼魂主題。"
+            },
+            {
+                name: "Computer Snack",
+                question: "What's a computer's favorite snack?",
+                answer: "Microchips!",
+                englishExplanation: "Microchips are computer components, but also a type of snack (potato chips).",
+                chineseExplanation: "微晶片是電腦組件，但也是一種零食（薯片）。"
+            },
+            {
+                name: "Tree's Drink",
+                question: "What's a tree's favorite drink?",
+                answer: "Root beer!",
+                englishExplanation: "Root beer is a beverage, and trees have roots.",
+                chineseExplanation: "Root beer是一種飲料，而樹有樹根。"
+            },
+            {
+                name: "Football Field",
+                question: "Why was the football field so wet?",
+                answer: "Because the players kept dribbling!",
+                englishExplanation: "In football/soccer, dribbling means controlling the ball, but it can also mean drooling.",
+                chineseExplanation: "在足球中，dribbling指帶球，但也可以指流口水。"
+            },
+            {
+                name: "Calendar's Long Life",
+                question: "How did the calendar live so long?",
+                answer: "Because it had many dates!",
+                englishExplanation: "A calendar has dates (days), and 'dates' can also mean romantic appointments.",
+                chineseExplanation: "日曆有日期（日子），而'dates'也可以指浪漫約會。"
+            },
+            {
+                name: "Sleeping Clock",
+                question: "Why did the clock go to therapy?",
+                answer: "Because it had too many ticks!",
+                englishExplanation: "Clocks make ticking sounds, and 'ticks' can also mean nervous habits or anxiety.",
+                chineseExplanation: "時鐘發出滴答聲，而'ticks'也可以指緊張的習慣或焦慮。"
+            },
+            {
+                name: "Musical Fruit",
+                question: "What musical instrument can you find in the bathroom?",
+                answer: "A tuba toothpaste!",
+                englishExplanation: "A play on words: 'tuba' (instrument) sounds like 'tube' (of toothpaste).",
+                chineseExplanation: "文字遊戲：'tuba'（樂器）聽起來像'tube'（牙膏管）。"
+            },
+            {
+                name: "Vegetable Orchestra",
+                question: "What do you call a band of vegetables?",
+                answer: "A pea-corps!",
+                englishExplanation: "A pun combining 'pea' (vegetable) and 'corps' (group), sounding like 'peas and carrots'.",
+                chineseExplanation: "結合'pea'（豌豆）和'corps'（團體）的雙關語，聽起來像'peas and carrots'。"
+            },
+            {
+                name: "Baking Dog",
+                question: "What do you call a dog that can do magic tricks?",
+                answer: "A labracadabrador!",
+                englishExplanation: "Combination of 'Labrador' (dog breed) and 'abracadabra' (magic word).",
+                chineseExplanation: "結合'Labrador'（拉布拉多犬）和'abracadabra'（魔術咒語）。"
+            },
+            {
+                name: "Fish's Money",
+                question: "How do fish get rich?",
+                answer: "They start a current account!",
+                englishExplanation: "A play on words: 'current' can mean water flow or present time, and a 'current account' is a bank account.",
+                chineseExplanation: "文字遊戲：'current' 可以指水流或當前時間，而'current account'是銀行帳戶。"
+            },
+            {
+                name: "Knitting Sheep",
+                question: "What do you call a sheep that can knit?",
+                answer: "A wool-verine!",
+                englishExplanation: "Combination of 'wool' (from sheep) and 'wolverine' (animal).",
+                chineseExplanation: "結合'wool'（羊毛）和'wolverine'（狼獾）。"
+            },
+            {
+                name: "Bicycle's Seat",
+                question: "Why can't a bicycle stand up by itself?",
+                answer: "Because it's two-tired!",
+                englishExplanation: "A pun on 'two-tired' sounding like 'too tired' and having two tires.",
+                chineseExplanation: "'two-tired' 雙關語，聽起來像'too tired'（太累），而且有兩個輪胎。"
+            },
+            {
+                name: "Grape's Dance",
+                question: "What do you call a dancing grape?",
+                answer: "A raisin to the occasion!",
+                englishExplanation: "A pun on 'raisin' (dried grape) and 'rising to the occasion' (meeting a challenge).",
+                chineseExplanation: "'raisin'（葡萄乾）和'rising to the occasion'（應對挑戰）的雙關語。"
+            },
+            {
+                name: "Lettuce's Advice",
+                question: "What did the lettuce say to the celery?",
+                answer: "Stop stalking me!",
+                englishExplanation: "Celery has stalks, and 'stalking' means following someone persistently.",
+                chineseExplanation: "芹菜有梗，而'stalking'指跟蹤某人。"
+            },
+            {
+                name: "Tomato's Race",
+                question: "Why did the tomato turn red?",
+                answer: "Because it saw the salad dressing!",
+                englishExplanation: "A pun: 'dressing' can mean salad sauce or getting dressed (putting on clothes).",
+                chineseExplanation: "'dressing' 雙關語，可以指沙拉醬或穿衣服。"
+            },
+            {
+                name: "Snowman's Breakfast",
+                question: "What does a snowman eat for breakfast?",
+                answer: "Frosted flakes!",
+                englishExplanation: "Frosted flakes are a cereal, and snowmen are frosty (covered in frost).",
+                chineseExplanation: "Frosted flakes是一種麥片，而雪人是frosty（覆蓋著霜）。"
+            },
+            {
+                name: "Book's Feelings",
+                question: "Why did the book join the police?",
+                answer: "Because it wanted to go undercover!",
+                englishExplanation: "Books have covers, and 'undercover' means working secretly (like a police detective).",
+                chineseExplanation: "書有封面，而'undercover'指秘密工作（像警察偵探）。"
+            },
+            {
+                name: "Tree's Complaint",
+                question: "Why did the tree go to the dentist?",
+                answer: "Because it needed a root canal!",
+                englishExplanation: "Trees have roots, and a root canal is a dental procedure.",
+                chineseExplanation: "樹有樹根，而根管治療是一種牙科手術。"
+            },
+            {
+                name: "Elephant's Sandwich",
+                question: "How do you make an elephant sandwich?",
+                answer: "First, you get a really big loaf of bread...",
+                englishExplanation: "The humor is in the literal interpretation - an elephant is huge, so the sandwich would be enormous.",
+                chineseExplanation: "幽默在於字面解釋 - 大象很大，所以三明治會非常巨大。"
+            },
+            {
+                name: "Chicken's Road",
+                question: "Why did the chicken cross the playground?",
+                answer: "To get to the other slide!",
+                englishExplanation: "A play on the classic chicken joke, replacing 'road' with 'playground' and 'side' with 'slide'.",
+                chineseExplanation: "經典雞肉笑話的變體，用'playground'代替'road'，用'slide'代替'side'。"
+            },
+            {
+                name: "Cow's Jump",
+                question: "What do you call a cow that jumps over a fence?",
+                answer: "A milk dud!",
+                englishExplanation: "Milk duds are a candy, and 'dud' means something that fails (the cow might fail at jumping).",
+                chineseExplanation: "Milk duds是一種糖果，而'dud'指失敗的東西（牛可能跳不過去）。"
+            },
+            {
+                name: "Bee's Hair",
+                question: "What do you call a bee that can't make up its mind?",
+                answer: "A maybe!",
+                englishExplanation: "A pun on 'bee' and 'be', with 'maybe' meaning uncertain.",
+                chineseExplanation: "'bee'和'be'的雙關語，'maybe'指不確定。"
+            },
+            {
+                name: "Ghost's Lie",
+                question: "What do you call a lying ghost?",
+                answer: "A transparent liar!",
+                englishExplanation: "Ghosts are transparent/see-through, and 'liar' means someone who tells lies.",
+                chineseExplanation: "鬼魂是透明的，而'liar'指說謊的人。"
+            },
+            {
+                name: "Butter's Flight",
+                question: "What did the butter say to the toast?",
+                answer: "I'm on a roll!",
+                englishExplanation: "Butter comes in rolls/sticks, and 'on a roll' means having a streak of success.",
+                chineseExplanation: "黃油成卷/條狀，而'on a roll'指連續成功。"
+            },
+            {
+                name: "Ocean's Wave",
+                question: "How do oceans say hello to each other?",
+                answer: "They wave!",
+                englishExplanation: "Oceans have waves, and waving is a greeting gesture.",
+                chineseExplanation: "海洋有波浪，而揮手是打招呼的姿勢。"
+            },
+            {
+                name: "Math's Problem",
+                question: "Why was the equal sign so humble?",
+                answer: "Because it knew it wasn't less than or greater than anyone!",
+                englishExplanation: "In math, = means equal, not less than (<) or greater than (>).",
+                chineseExplanation: "在數學中，= 表示等於，不是小於 (<) 或大於 (>)。"
+            },
+            {
+                name: "Plant's Music",
+                question: "What kind of music do plants like?",
+                answer: "Rock and soil!",
+                englishExplanation: "A pun on 'rock and roll' replacing 'roll' with 'soil' (where plants grow).",
+                chineseExplanation: "'rock and roll'的雙關語，用'soil'（土壤）代替'roll'。"
+            },
+            {
+                name: "Pencil's Joke",
+                question: "What did the pencil say to the paper?",
+                answer: "I dot my i's on you!",
+                englishExplanation: "When writing, you dot i's, and 'I have my eyes on you' means watching someone closely.",
+                chineseExplanation: "寫字時要給i加點，而'I have my eyes on you'指密切關注某人。"
+            },
+            {
+                name: "Coffee's Injury",
+                question: "What do you call a sad cup of coffee?",
+                answer: "Depresso!",
+                englishExplanation: "A pun on 'espresso' (coffee) and 'depressed' (sad).",
+                chineseExplanation: "'espresso'（濃縮咖啡）和'depressed'（沮喪）的雙關語。"
+            },
+            {
+                name: "Mountain's Humor",
+                question: "What's a mountain's favorite type of humor?",
+                answer: "Summit-rical!",
+                englishExplanation: "A play on 'summit' (mountain top) and 'symmetrical' (balanced humor).",
+                chineseExplanation: "'summit'（山頂）和'symmetrical'（對稱幽默）的文字遊戲。"
+            },
+            {
+                name: "Broom's Vacation",
+                question: "Why did the broom go on vacation?",
+                answer: "Because it was swept off its feet!",
+                englishExplanation: "Brooms sweep, and 'swept off your feet' means falling in love.",
+                chineseExplanation: "掃帚用來清掃，而'swept off your feet'指墜入愛河。"
+            },
+            {
+                name: "Clock's Diet",
+                question: "Why did the clock go on a diet?",
+                answer: "Because it had too many seconds!",
+                englishExplanation: "Clocks measure seconds, and having 'too many seconds' could mean too much time or too many dessert portions.",
+                chineseExplanation: "時鐘測量秒數，而'too many seconds'可以指太多時間或太多甜點份量。"
+            },
+            {
+                name: "Light's Fear",
+                question: "Why was the light bulb afraid of the dark?",
+                answer: "Because it might get switched off!",
+                englishExplanation: "Light bulbs provide light and get turned/switched off, which is like 'dying' for a light bulb.",
+                chineseExplanation: "燈泡提供光線，被關掉就像燈泡的'死亡'。"
+            },
+            {
+                name: "Bread's Complaint",
+                question: "What did the bread say to the toaster?",
+                answer: "You complete me!",
+                englishExplanation: "Bread becomes toast in a toaster, and 'you complete me' is a romantic phrase.",
+                chineseExplanation: "麵包在烤麵包機裡變成吐司，而'you complete me'是浪漫的話語。"
+            },
+            {
+                name: "Computer's Cold",
+                question: "Why did the computer catch a cold?",
+                answer: "Because it left its Windows open!",
+                englishExplanation: "Windows is an operating system, and leaving windows open can cause drafts/colds.",
+                chineseExplanation: "Windows是一個作業系統，而打開窗戶會導致著涼/感冒。"
+            },
+            {
+                name: "Fish's School",
+                question: "Why did the fish get bad grades?",
+                answer: "Because it was below sea level!",
+                englishExplanation: "Fish live below sea level, and 'below C level' sounds similar (C is a passing grade).",
+                chineseExplanation: "魚生活在海平面以下，而'below C level'聽起來相似（C是及格分數）。"
+            },
+            {
+                name: "Egg's Talent",
+                question: "What do you call an egg that can tell jokes?",
+                answer: "A comedi-hen!",
+                englishExplanation: "A pun on 'comedian' and 'hen' (which lays eggs).",
+                chineseExplanation: "'comedian'（喜劇演員）和'hen'（母雞）的雙關語。"
+            },
+            {
+                name: "Book's Weight",
+                question: "Why did the book gain weight?",
+                answer: "Because it had too many characters!",
+                englishExplanation: "Books have characters (letters/people in stories), and 'characters' can also mean distinctive personalities.",
+                chineseExplanation: "書有字符（字母/故事人物），而'characters'也可以指獨特的個性。"
+            },
+            {
+                name: "Door's Prize",
+                question: "What did the door win at the awards show?",
+                answer: "A no-bell prize!",
+                englishExplanation: "A pun on 'Nobel Prize' and doorbells (which doors don't have inherently).",
+                chineseExplanation: "'Nobel Prize'（諾貝爾獎）和門鈴（門本身沒有）的雙關語。"
+            },
+            {
+                name: "Shoe's Secret",
+                question: "What did one shoe say to the other?",
+                answer: "I'll wait for you on the other side!",
+                englishExplanation: "Shoes come in pairs (left and right), and they're often on opposite sides.",
+                chineseExplanation: "鞋子成對出現（左和右），而且通常在相反的兩側。"
+            },
+            {
+                name: "Moon's Credit",
+                question: "Why did the moon get a loan?",
+                answer: "Because it was going through a phase!",
+                englishExplanation: "The moon has phases (full, crescent), and 'going through a phase' means a temporary period.",
+                chineseExplanation: "月亮有盈虧（滿月、新月），而'going through a phase'指經歷一個階段。"
+            },
+            {
+                name: "Orange's Phone",
+                question: "What do you call an orange that makes phone calls?",
+                answer: "A cell-citrus!",
+                englishExplanation: "A pun on 'cell phone' and 'citrus' (orange is a citrus fruit).",
+                chineseExplanation: "'cell phone'（手機）和'citrus'（柑橘類水果）的雙關語。"
+            },
+            {
+                name: "Pen's Confession",
+                question: "What did the pen say to the pencil?",
+                answer: "You're looking sharp!",
+                englishExplanation: "Pencils have sharp points, and 'looking sharp' means looking stylish.",
+                chineseExplanation: "鉛筆有尖尖的筆頭，而'looking sharp'指看起來時髦。"
+            },
+            {
+                name: "Guitar's Food",
+                question: "What's a guitar's favorite food?",
+                answer: "Fret chips!",
+                englishExplanation: "Guitars have frets (metal strips), and 'fret chips' sounds like 'potato chips'.",
+                chineseExplanation: "吉他有品絲（金屬條），而'fret chips'聽起來像'potato chips'（薯片）。"
+            },
+            {
+                name: "Book's Crime",
+                question: "Why did the book get arrested?",
+                answer: "Because it was caught in a cover-up!",
+                englishExplanation: "Books have covers, and a 'cover-up' means hiding the truth (often illegal).",
+                chineseExplanation: "書有封面，而'cover-up'指掩蓋真相（通常是非法的）。"
+            },
+            {
+                name: "Coffee's Run",
+                question: "Why did the coffee file a police report?",
+                answer: "Because it got mugged!",
+                englishExplanation: "Coffee comes in mugs, and 'mugged' means robbed.",
+                chineseExplanation: "咖啡裝在馬克杯裡，而'mugged'指被搶劫。"
+            },
+            {
+                name: "Banana's Slipper",
+                question: "Why did the banana go to the doctor?",
+                answer: "Because it wasn't peeling well!",
+                englishExplanation: "Bananas have peels, and 'peeling' sounds like 'feeling' (not feeling well = sick).",
+                chineseExplanation: "香蕉有皮，而'peeling'聽起來像'feeling'（感覺不舒服 = 生病）。"
+            },
+            {
+                name: "Computer's Exercise",
+                question: "How does a computer get exercise?",
+                answer: "It does a byte-run!",
+                englishExplanation: "Computers process bytes (data units), and 'byte-run' sounds like 'fun run' (running event).",
+                chineseExplanation: "電腦處理字節（數據單位），而'byte-run'聽起來像'fun run'（跑步活動）。"
+            },
+            {
+                name: "Fish's Math",
+                question: "What's a fish's favorite math subject?",
+                answer: "Alge-bra!",
+                englishExplanation: "A pun on 'algebra' and 'bra' (part of sea-bra, but not really).",
+                chineseExplanation: "'algebra'（代數）的雙關語，聽起來像'bra'。"
+            },
+            {
+                name: "Tree's Email",
+                question: "How do trees get on the internet?",
+                answer: "They log in!",
+                englishExplanation: "Trees are made into logs, and 'log in' means accessing a computer system.",
+                chineseExplanation: "樹被製成原木，而'log in'指登入電腦系統。"
+            },
+            {
+                name: "Light's Secret",
+                question: "How does the sun stay informed?",
+                answer: "It reads the light-news!",
+                englishExplanation: "The sun gives light, and 'light-news' sounds like 'late news' or 'light' news (not serious).",
+                chineseExplanation: "太陽發出光，而'light-news'聽起來像'late news'或'light' news（不嚴肅的新聞）。"
+            },
+            {
+                name: "Milk's Complaint",
+                question: "Why did the milk go to school?",
+                answer: "To get pasteur-ized!",
+                englishExplanation: "A pun on 'pasteurized' (milk treatment) and 'pasteur-ized' sounds like 'past your eyes'.",
+                chineseExplanation: "'pasteurized'（巴氏殺菌）的雙關語，聽起來像'past your eyes'。"
+            },
+            {
+                name: "Clock's Nap",
+                question: "Why did the clock take a nap?",
+                answer: "Because it was wound up!",
+                englishExplanation: "Clocks need winding, and 'wound up' means tense/needing relaxation.",
+                chineseExplanation: "時鐘需要上發條，而'wound up'指緊張/需要放鬆。"
+            },
+            {
+                name: "Bread's Joke",
+                question: "What did the bread say when it won the race?",
+                answer: "I loaf you all!",
+                englishExplanation: "Bread comes in loaves, and 'loaf' sounds like 'love'.",
+                chineseExplanation: "麵包成條狀，而'loaf'聽起來像'love'。"
+            },
+            {
+                name: "Computer's Pet",
+                question: "What's a computer's favorite pet?",
+                answer: "A mouse!",
+                englishExplanation: "Computers use mice (pointing devices), and mice are also animals.",
+                chineseExplanation: "電腦使用滑鼠（指向設備），而老鼠也是動物。"
+            },
+            {
+                name: "Vegetable's Band",
+                question: "What do you call a vegetable rock band?",
+                answer: "The Beet-les!",
+                englishExplanation: "A pun on 'The Beatles' (band) and 'beet' (vegetable).",
+                chineseExplanation: "'The Beatles'（披頭四樂隊）和'beet'（甜菜）的雙關語。"
+            },
+            {
+                name: "Book's Travel",
+                question: "Why did the book go to the airport?",
+                answer: "Because it had a plane ticket!",
+                englishExplanation: "Books have pages (planes of paper), and 'plane ticket' sounds like 'plain ticket'.",
+                chineseExplanation: "書有頁面（紙的平面），而'plane ticket'聽起來像'plain ticket'。"
+            },
+            {
+                name: "Coffee's Work",
+                question: "Where does coffee go to work?",
+                answer: "At the brew-seum!",
+                englishExplanation: "Coffee is brewed, and 'brew-seum' sounds like 'museum'.",
+                chineseExplanation: "咖啡是沖泡的，而'brew-seum'聽起來像'museum'（博物館）。"
+            },
+            {
+                name: "Banana's Song",
+                question: "What's a banana's favorite song?",
+                answer: "Peel Out!",
+                englishExplanation: "Bananas are peeled, and 'peel out' sounds like 'peal out' (loud sound) or leaving quickly.",
+                chineseExplanation: "香蕉要剝皮，而'peel out'聽起來像'peal out'（響亮的聲音）或快速離開。"
+            },
+            {
+                name: "Computer's Date",
+                question: "Why did the computer go on a date?",
+                answer: "Because it found its mouse!",
+                englishExplanation: "Computers have mice (pointing devices), and finding a 'mouse' could mean finding a date.",
+                chineseExplanation: "電腦有滑鼠（指向設備），找到'滑鼠'可能意味著找到約會對象。"
+            },
+            {
+                name: "Fish's Game",
+                question: "What game do fish play?",
+                answer: "Go fish!",
+                englishExplanation: "'Go fish' is a card game, and fish live in water.",
+                chineseExplanation: "'Go fish'是一種紙牌遊戲，而魚生活在水裡。"
+            },
+            {
+                name: "Tree's Money",
+                question: "How do trees pay for things?",
+                answer: "With their root cash!",
+                englishExplanation: "Trees have roots, and 'root cash' sounds like 'cold hard cash' (actual money).",
+                chineseExplanation: "樹有樹根，而'root cash'聽起來像'cold hard cash'（現金）。"
+            },
+            {
+                name: "Light's Song",
+                question: "What's a light bulb's favorite music?",
+                answer: "Pop!",
+                englishExplanation: "Light bulbs can pop when they burn out, and 'pop' is a music genre.",
+                chineseExplanation: "燈泡燒壞時會爆開，而'pop'是一種音樂類型。"
+            },
+            {
+                name: "Milk's Sport",
+                question: "What sport does milk play?",
+                answer: "Curd-ling!",
+                englishExplanation: "Milk can curdle, and 'curd-ling' sounds like 'curling' (sport on ice).",
+                chineseExplanation: "牛奶會凝固，而'curd-ling'聽起來像'curling'（冰上運動）。"
+            },
+            {
+                name: "Clock's Secret",
+                question: "What did the clock say when it was hungry?",
+                answer: "I'm going to eat up some time!",
+                englishExplanation: "Clocks measure time, and 'eat up time' means consuming time.",
+                chineseExplanation: "時鐘測量時間，而'eat up time'指消耗時間。"
+            },
+            {
+                name: "Bread's Dream",
+                question: "What did the bread say in its sleep?",
+                answer: "I'm toast!",
+                englishExplanation: "Bread becomes toast when heated, and 'I'm toast' means in trouble.",
+                chineseExplanation: "麵包加熱後變成吐司，而'I'm toast'指有麻煩了。"
+            },
+            {
+                name: "Ocean's Question",
+                question: "What did the ocean say to the boat?",
+                answer: "Nothing, it just gave it a wave!",
+                englishExplanation: "Oceans wave, boats ride waves.",
+                chineseExplanation: "海洋有波浪，船隻乘浪而行。"
+            },
+            {
+                name: "Vegetable's Show",
+                question: "What do you call a funny vegetable?",
+                answer: "A laughing stock!",
+                englishExplanation: "'Laughing stock' means object of ridicule, and vegetables can be stocks (broth bases).",
+                chineseExplanation: "'Laughing stock'指嘲笑對象，而蔬菜可以是高湯底料。"
+            },
+            {
+                name: "Book's Friend",
+                question: "Who is a book's best friend?",
+                answer: "Its cover!",
+                englishExplanation: "Books have covers that protect them, like friends protect each other.",
+                chineseExplanation: "書有封面保護它們，就像朋友互相保護一樣。"
+            },
+            {
+                name: "Coffee's Friend",
+                question: "Who is coffee's best friend?",
+                answer: "The mug!",
+                englishExplanation: "Coffee is served in mugs, which hold it close.",
+                chineseExplanation: "咖啡裝在馬克杯裡，馬克杯緊緊地盛著它。"
+            },
+            {
+                name: "Banana's Friend",
+                question: "Who is a banana's best friend?",
+                answer: "The other banana!",
+                englishExplanation: "Bananas often come in bunches (groups), sticking together.",
+                chineseExplanation: "香蕉通常成串出現（群組），粘在一起。"
+            },
+            {
+                name: "Computer's Sleep",
+                question: "How does a computer sleep?",
+                answer: "It goes into standby mode!",
+                englishExplanation: "Computers have standby/sleep mode to save power.",
+                chineseExplanation: "電腦有待機/睡眠模式以節省電力。"
+            },
+            {
+                name: "Fish's School",
+                question: "Why are fish so smart?",
+                answer: "Because they live in schools!",
+                englishExplanation: "Fish live in groups called schools, and 'school' is also where you learn.",
+                chineseExplanation: "魚生活在稱為魚群的群體中，而'school'也是學習的地方。"
+            },
+            {
+                name: "Tree's Book",
+                question: "What's a tree's favorite book?",
+                answer: "The root of all evil!",
+                englishExplanation: "Trees have roots, and 'the root of all evil' is a phrase about money.",
+                chineseExplanation: "樹有樹根，而'the root of all evil'是關於金錢的短語。"
+            },
+            {
+                name: "Light's Holiday",
+                question: "Where do light bulbs go on holiday?",
+                answer: "To the sun!",
+                englishExplanation: "Light bulbs give light like the sun, so they'd visit their 'relative'.",
+                chineseExplanation: "燈泡像太陽一樣發光，所以它們會拜訪它們的'親戚'。"
+            },
+            {
+                name: "Milk's Holiday",
+                question: "Where does milk go on holiday?",
+                answer: "To the dairy-air!",
+                englishExplanation: "Milk comes from dairies, and 'dairy-air' sounds like 'daycare' or 'airy' place.",
+                chineseExplanation: "牛奶來自乳品場，而'dairy-air'聽起來像'daycare'或通風的地方。"
+            },
+            {
+                name: "Clock's Holiday",
+                question: "Where do clocks go on holiday?",
+                answer: "To the spring break!",
+                englishExplanation: "Clocks have springs (mechanisms), and 'spring break' is a holiday.",
+                chineseExplanation: "時鐘有彈簧（機械裝置），而'spring break'是假期。"
+            },
+            {
+                name: "Bread's Holiday",
+                question: "Where does bread go on holiday?",
+                answer: "To the toast coast!",
+                englishExplanation: "Bread becomes toast, and 'toast coast' sounds like 'toast' and 'coast' (beach).",
+                chineseExplanation: "麵包變成吐司，而'toast coast'聽起來像'toast'和'coast'（海灘）。"
+            },
+            {
+                name: "Ocean's Holiday",
+                question: "Where does the ocean go on holiday?",
+                answer: "To the bay!",
+                englishExplanation: "Oceans have bays (inlets), and 'bay' sounds like 'stay' or a place.",
+                chineseExplanation: "海洋有海灣（入口），而'bay'聽起來像'stay'或一個地方。"
+            },
+            {
+                name: "Computer's Holiday",
+                question: "Where do computers go on holiday?",
+                answer: "To the cloud!",
+                englishExplanation: "Computers use cloud storage, and clouds are in the sky (holiday destination).",
+                chineseExplanation: "電腦使用雲端存儲，而雲朵在天空中（度假目的地）。"
+            },
+            {
+                name: "Vegetable's Holiday",
+                question: "Where do vegetables go on holiday?",
+                answer: "To the salad bar!",
+                englishExplanation: "Vegetables are in salads, and salad bars are restaurants.",
+                chineseExplanation: "蔬菜用於沙拉，而沙拉吧是餐廳。"
+            },
+            {
+                name: "Book's Holiday",
+                question: "Where do books go on holiday?",
+                answer: "To the book-shore!",
+                englishExplanation: "Books have shores (edges), and 'book-shore' sounds like 'bookstore'.",
+                chineseExplanation: "書有書邊，而'book-shore'聽起來像'bookstore'（書店）。"
+            },
+            {
+                name: "Coffee's Holiday",
+                question: "Where does coffee go on holiday?",
+                answer: "To the brew-tiful beach!",
+                englishExplanation: "Coffee is brewed, and 'brew-tiful' sounds like 'beautiful'.",
+                chineseExplanation: "咖啡是沖泡的，而'brew-tiful'聽起來像'beautiful'（美麗的）。"
+            },
+            {
+                name: "Banana's Holiday",
+                question: "Where do bananas go on holiday?",
+                answer: "To the peel-ican island!",
+                englishExplanation: "Bananas have peels, and 'peel-ican' sounds like 'pelican' (bird) and 'island'.",
+                chineseExplanation: "香蕉有皮，而'peel-ican'聽起來像'pelican'（鵜鶘）和'island'（島嶼）。"
+            },
+            {
+                name: "Final Joke",
+                question: "Why did the joke go to therapy?",
+                answer: "Because it had too many issues!",
+                englishExplanation: "Jokes can have punchlines or 'issues', and therapy helps with issues.",
+                chineseExplanation: "笑話有笑點或'issues'（問題），而治療有助於解決問題。"
+            }
+        ];
+
+        // DOM elements
+        const jokeList = document.getElementById('jokeList');
+        const jokeQuestion = document.getElementById('jokeQuestion');
+        const jokeAnswer = document.getElementById('jokeAnswer');
+        const englishExplanation = document.getElementById('englishExplanation');
+        const chineseExplanation = document.getElementById('chineseExplanation');
+        const showAnswerBtn = document.getElementById('showAnswerBtn');
+        const showExplanationBtn = document.getElementById('showExplanationBtn');
+        const explanations = document.getElementById('explanations');
+        const randomJokeBtn = document.getElementById('randomJokeBtn');
+
+        // Current joke index
+        let currentJokeIndex = 0;
+        let answerVisible = false;
+        let explanationVisible = false;
+
+        // Initialize joke list
+        function initJokeList() {
+            jokeList.innerHTML = '';
+            
+            jokes.forEach((joke, index) => {
+                const jokeElement = document.createElement('div');
+                jokeElement.className = 'joke-item';
+                if (index === 0) {
+                    jokeElement.classList.add('active');
+                }
+                
+                jokeElement.innerHTML = `
+                    <div class="joke-name">${index + 1}. ${joke.name}</div>
+                `;
+                
+                jokeElement.addEventListener('click', () => {
+                    // Remove active class from all jokes
+                    document.querySelectorAll('.joke-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked joke
+                    jokeElement.classList.add('active');
+                    
+                    // Display the joke
+                    displayJoke(index);
+                });
+                
+                jokeList.appendChild(jokeElement);
+            });
+        }
+
+        // Display a joke by index
+        function displayJoke(index) {
+            // Hide answer and explanation when switching jokes
+            jokeAnswer.style.display = 'none';
+            explanations.style.display = 'none';
+            showAnswerBtn.innerHTML = '<i class="fas fa-eye"></i> Show Answer';
+            showExplanationBtn.innerHTML = '<i class="fas fa-language"></i> Show Explanation (English & Traditional Chinese)';
+            
+            answerVisible = false;
+            explanationVisible = false;
+            
+            currentJokeIndex = index;
+            const joke = jokes[index];
+            
+            jokeQuestion.textContent = joke.question;
+            jokeAnswer.textContent = joke.answer;
+            englishExplanation.textContent = joke.englishExplanation;
+            chineseExplanation.textContent = joke.chineseExplanation;
+        }
+
+        // Show answer button
+        showAnswerBtn.addEventListener('click', () => {
+            if (!answerVisible) {
+                jokeAnswer.style.display = 'block';
+                showAnswerBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Answer';
+                answerVisible = true;
+            } else {
+                jokeAnswer.style.display = 'none';
+                showAnswerBtn.innerHTML = '<i class="fas fa-eye"></i> Show Answer';
+                answerVisible = false;
+            }
+        });
+
+        // Show explanation button
+        showExplanationBtn.addEventListener('click', () => {
+            if (!explanationVisible) {
+                explanations.style.display = 'block';
+                showExplanationBtn.innerHTML = '<i class="fas fa-times"></i> Hide Explanation';
+                explanationVisible = true;
+            } else {
+                explanations.style.display = 'none';
+                showExplanationBtn.innerHTML = '<i class="fas fa-language"></i> Show Explanation (English & Traditional Chinese)';
+                explanationVisible = false;
+            }
+        });
+
+        // Random joke button
+        randomJokeBtn.addEventListener('click', () => {
+            // Remove active class from all jokes
+            document.querySelectorAll('.joke-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Generate random index
+            const randomIndex = Math.floor(Math.random() * jokes.length);
+            
+            // Add active class to random joke
+            document.querySelectorAll('.joke-item')[randomIndex].classList.add('active');
+            
+            // Display the random joke
+            displayJoke(randomIndex);
+            
+            // Scroll the joke list to show the selected joke
+            const jokeItems = document.querySelectorAll('.joke-item');
+            if (jokeItems[randomIndex]) {
+                jokeItems[randomIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        // Initialize the page
+        initJokeList();
+        displayJoke(0);
+    </script>
+</body>
+</html>
