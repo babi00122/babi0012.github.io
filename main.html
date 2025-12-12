@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My World - Frog Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-light: #f1f8e9;
+            --green: #81c784;
+            --green-dark: #4caf50;
+            --green-deep: #2e7d32;
+            --sakura: #ffb7c5;
+            --sakura-dark: #f48fb1;
+            --white: #ffffff;
+            --text: #424242;
+            --accent: #ff9800;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--green-light);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 90% 10%, rgba(255, 183, 197, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(129, 199, 132, 0.15) 0%, transparent 50%);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Back button */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--green);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn:hover {
+            background-color: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin: 40px 0 60px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--green-deep);
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background-color: var(--sakura);
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Story section */
+        .story-section {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 0 auto 60px;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(129, 199, 132, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--green), var(--sakura));
+        }
+
+        .story-title {
+            font-size: 1.5rem;
+            color: var(--green-deep);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--text);
+        }
+
+        .story-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--green-dark);
+            font-weight: 600;
+        }
+
+        /* Button container */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        /* Buttons */
+        .portal-button {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            overflow: hidden;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .portal-button:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .portal-button:active {
+            transform: translateY(-5px);
+        }
+
+        .joke-btn {
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
+        }
+
+        .cat-btn {
+            background: linear-gradient(135deg, var(--sakura-dark), var(--sakura));
+        }
+
+        .portal-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .button-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* Button click effect */
+        .click-effect {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            z-index: 1;
+        }
+
+        /* Decorative elements */
+        .sakura {
+            position: absolute;
+            color: var(--sakura);
+            z-index: 0;
+            font-size: 1.5rem;
+            animation: float 15s infinite linear;
+        }
+
+        .bamboo {
+            position: absolute;
+            color: var(--green);
+            z-index: 0;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .bamboo-1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(15deg);
+        }
+
+        .bamboo-2 {
+            bottom: 10%;
+            right: 5%;
+            transform: rotate(-15deg);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px 20px;
+            color: var(--text);
+            font-size: 1rem;
+            position: relative;
+        }
+
+        footer:before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .travel-icon {
+            font-size: 2rem;
+            color: var(--green);
+            margin: 20px 0;
+        }
+
+        .footer-note {
+            max-width: 600px;
+            margin: 20px auto;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .button-container {
+                gap: 30px;
+            }
+            
+            .portal-button {
+                width: 220px;
+                height: 220px;
+                font-size: 1.6rem;
+            }
+            
+            .portal-icon {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .story-section {
+                padding: 25px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .portal-button {
+                width: 280px;
+                height: 200px;
+                flex-direction: row;
+                justify-content: flex-start;
+                padding-left: 30px;
+                text-align: left;
+            }
+            
+            .portal-icon {
+                margin-bottom: 0;
+                margin-right: 20px;
+                font-size: 2.5rem;
+            }
+            
+            .bamboo {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                margin: 30px 0 40px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .story-section {
+                padding: 20px;
+            }
+            
+            .story-title {
+                font-size: 1.3rem;
+            }
+            
+            .story-text {
+                font-size: 1rem;
+            }
+            
+            .portal-button {
+                width: 100%;
+                max-width: 300px;
+                height: 180px;
+            }
+            
+            .back-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 20px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative elements -->
+    <div class="sakura" style="top:10%; left:5%; animation-delay:0s;"><i class="fas fa-spa"></i></div>
+    <div class="sakura" style="top:20%; right:10%; animation-delay:-5s;"><i class="fas fa-spa"></i></div>
+    <div class="sakura" style="bottom:30%; left:15%; animation-delay:-10s;"><i class="fas fa-spa"></i></div>
+    <div class="bamboo bamboo-1"><i class="fas fa-tree"></i></div>
+    <div class="bamboo bamboo-2"><i class="fas fa-tree"></i></div>
+    
+    <div class="container">
+        <!-- Back button -->
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i> Back to Login
+        </button>
+        
+        <header>
+            <h1>Welcome to My World</h1>
+            <p class="subtitle">Your personal sanctuary for laughter, joy, and peaceful moments. Discover content that brightens your day and soothes your soul.</p>
+        </header>
+        
+        <section class="story-section">
+            <h2 class="story-title"><i class="fas fa-book-open"></i> The Story of This Place</h2>
+            <p class="story-text">Once upon a time, in a peaceful garden where cherry blossoms danced in the breeze, a little frog discovered two magical pathways. One led to a clearing filled with laughter, where jokes bloomed like flowers. The other led to a cozy nook where a gentle cat awaited with calming presence.</p>
+            
+            <p class="story-text">This digital garden was created as a sanctuary—a place where you can escape the busy world and find moments of joy and peace. Whether you need a good laugh to lift your spirits or a comforting companion for your travels, this is your personal retreat.</p>
+            
+            <p class="story-text">Choose your path below. Each journey begins with a single step, and each visit brings new discoveries. <span class="highlight">Welcome, traveler.</span></p>
+        </section>
+        
+        <div class="button-container">
+            <a href="joke.html" class="portal-button joke-btn" id="jokeBtn">
+                <i class="fas fa-laugh-beam portal-icon"></i>
+                <div>
+                    Joke Garden
+                    <div class="button-subtitle">Where laughter blooms and smiles grow</div>
+                </div>
+            </a>
+            
+            <a href="packcat.html" class="portal-button cat-btn" id="catBtn">
+                <i class="fas fa-cat portal-icon"></i>
+                <div>
+                    Travel Companion
+                    <div class="button-subtitle">Your gentle friend for peaceful journeys</div>
+                </div>
+            </a>
+        </div>
+        
+        <footer>
+            <div class="travel-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <p class="footer-note">This digital garden is tended with care, updated regularly with new content to brighten your days. Return whenever you need a moment of joy or peace.</p>
+            <p>© 2023 My World Sanctuary. Created with kindness.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Button click effects
+        const buttons = document.querySelectorAll('.portal-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                ripple.classList.add('click-effect');
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size/2;
+                const y = e.clientY - rect.top - size/2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add floating animation to sakura elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const sakuraElements = document.querySelectorAll('.sakura');
+            sakuraElements.forEach((el, index) => {
+                // Set random animation duration for each sakura
+                const duration = 15 + Math.random() * 10;
+                el.style.animationDuration = `${duration}s`;
+                
+                // Set random initial position for mobile
+                if (window.innerWidth < 768) {
+                    const randomTop = 5 + Math.random() * 90;
+                    const randomLeft = 5 + Math.random() * 90;
+                    el.style.top = `${randomTop}%`;
+                    el.style.left = `${randomLeft}%`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
